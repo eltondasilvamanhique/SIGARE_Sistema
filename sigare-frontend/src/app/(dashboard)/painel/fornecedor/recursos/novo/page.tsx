@@ -247,7 +247,7 @@ export default function NovoRecursoPage() {
               <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-lg p-3 text-xs text-[#1e40af] mb-1">
                 💡 Abra o <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="underline font-medium">Google Maps</a>, clique com o botão direito no local e copie as coordenadas. Ex: <strong>-25.0519, 33.6442</strong>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1">
                   <label className="text-xs font-medium text-slate-500 uppercase tracking-wide">Latitude</label>
                   <input
@@ -287,7 +287,7 @@ export default function NovoRecursoPage() {
           )}
 
           {/* Categoria + Quantidade */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-semibold text-slate-700">
                 Categoria <span className="text-red-500">*</span>
@@ -333,7 +333,7 @@ export default function NovoRecursoPage() {
             <div className="bg-[#fef9e7] border border-[#e9b94e] rounded-lg p-3 text-xs text-[#0f2554]">
               💡 Até 8 horas cobra-se o preço por hora. Acima de 8 horas aplica-se o preço diário.
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-medium text-slate-500 uppercase tracking-wide">Preço / hora (MZN)</label>
                 <div className="relative">

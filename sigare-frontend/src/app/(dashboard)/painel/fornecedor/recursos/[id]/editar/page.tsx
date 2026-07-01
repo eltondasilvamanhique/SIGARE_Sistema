@@ -251,7 +251,7 @@ export default function EditarRecursoPage() {
                 </a>
                 , clique com o botão direito no local e copie as coordenadas.
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="flex flex-col gap-1">
                   <label className="text-xs font-medium text-slate-500 uppercase tracking-wide">Latitude</label>
                   <input
@@ -291,7 +291,7 @@ export default function EditarRecursoPage() {
           )}
 
           {/* Categoria + Quantidade */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-semibold text-slate-700">
                 Categoria <span className="text-red-500">*</span>
@@ -333,7 +333,7 @@ export default function EditarRecursoPage() {
             <div className="bg-[#fef9e7] border border-[#e9b94e] rounded-lg p-3 text-xs text-[#0f2554]">
               💡 Até 8 horas cobra-se o preço por hora. Acima de 8 horas aplica-se o preço diário.
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-medium text-slate-500 uppercase tracking-wide">Preço / hora (MZN)</label>
                 <div className="relative">

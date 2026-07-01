@@ -151,7 +151,7 @@ export default function ReciboFornecedorPage() {
         </div>
 
         {/* Partes */}
-        <div className="grid grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
           <div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Cliente (Organizador)</p>
             <p className="font-semibold text-[#0f2554]">{recibo.utilizador.nome}</p>
@@ -171,7 +171,7 @@ export default function ReciboFornecedorPage() {
         {/* Detalhes do evento */}
         <div className="bg-slate-50 rounded-xl p-5 mb-6">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-3">Detalhes do Evento</p>
-          <div className="grid grid-cols-4 gap-4 text-sm">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
             <div>
               <p className="text-xs text-slate-400">Data</p>
               <p className="font-semibold text-[#0f2554]">{dataEvento}</p>
@@ -196,8 +196,8 @@ export default function ReciboFornecedorPage() {
         {/* Recurso */}
         <div className="mb-6">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-3">Recurso Reservado</p>
-          <div className="border border-slate-200 rounded-xl overflow-hidden">
-            <table className="w-full text-sm">
+          <div className="border border-slate-200 rounded-xl overflow-hidden overflow-x-auto">
+            <table className="w-full text-sm min-w-[420px]">
               <thead className="bg-slate-50 text-xs text-slate-500 uppercase">
                 <tr>
                   <th className="px-4 py-2.5 text-left">Descrição</th>

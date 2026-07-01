@@ -99,7 +99,7 @@ export default function FuncionariosPage() {
         <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
           <h2 className="text-sm font-bold text-[#0f2554] mb-4">Novo Funcionário</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold text-slate-600">Nome *</label>
                 <input
@@ -153,7 +153,7 @@ export default function FuncionariosPage() {
         </div>
       ) : (
         <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto"><table className="w-full min-w-[600px] text-sm">
             <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
               <tr>
                 <th className="px-5 py-3 text-left">Nome</th>
@@ -179,7 +179,7 @@ export default function FuncionariosPage() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
         </div>
       )}
     </div>
