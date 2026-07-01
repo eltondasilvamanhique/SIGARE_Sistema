@@ -33,3 +33,6 @@ npm-debug.log*
 
 # Prisma
 sigare-backend/prisma/migrations/
+
+# Claude Code (sessão local)
+.claude/
