@@ -1,0 +1,35 @@
+# Dependências
+node_modules/
+sigare-backend/node_modules/
+sigare-frontend/node_modules/
+
+# Build
+sigare-backend/dist/
+sigare-frontend/.next/
+sigare-frontend/out/
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+sigare-backend/.env
+sigare-frontend/.env
+sigare-frontend/.env.local
+
+# TypeScript
+sigare-frontend/tsconfig.tsbuildinfo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+
+# Prisma
+sigare-backend/prisma/migrations/

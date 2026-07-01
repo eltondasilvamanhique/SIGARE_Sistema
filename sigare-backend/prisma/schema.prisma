@@ -1,0 +1,196 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TipoUtilizador {
+  organizador
+  fornecedor
+  administrador
+  gestor_municipal
+}
+
+enum EstadoReserva {
+  pendente
+  confirmada
+  rejeitada
+  em_andamento
+  terminada
+  devolvida
+}
+
+model Utilizador {
+  id_utilizador  String          @id @default(uuid())
+  nome           String          @db.VarChar(120)
+  email          String          @unique @db.VarChar(160)
+  senha_hash     String          @db.VarChar(200)
+  tipo           TipoUtilizador
+  telefone       String?         @db.VarChar(30)
+  bloqueado      Boolean         @default(false)
+  reset_token    String?         @db.VarChar(128)
+  reset_expiry   DateTime?
+  criado_em      DateTime        @default(now())
+
+  fornecedor     Fornecedor?
+  reservas       Reserva[]
+  notificacoes   Notificacao[]
+  avaliacoes     Avaliacao[]
+  reclamacoes    Reclamacao[]
+
+  @@map("utilizador")
+}
+
+model Fornecedor {
+  id_fornecedor  String       @id @default(uuid())
+  id_utilizador  String       @unique
+  nome           String       @db.VarChar(120)
+  contacto       String?      @db.VarChar(60)
+  endereco       String?      @db.VarChar(200)
+  validado       Boolean      @default(false)
+
+  utilizador     Utilizador    @relation(fields: [id_utilizador], references: [id_utilizador])
+  recursos       Recurso[]
+  funcionarios   Funcionario[]
+
+  @@map("fornecedor")
+}
+
+model Categoria {
+  id_categoria   String     @id @default(uuid())
+  nome           String     @unique @db.VarChar(80)
+
+  recursos       Recurso[]
+
+  @@map("categoria")
+}
+
+model Recurso {
+  id_recurso      String      @id @default(uuid())
+  nome            String      @db.VarChar(150)
+  descricao       String?
+  endereco        String?     @db.VarChar(300)
+  preco           Decimal     @db.Decimal(10, 2)
+  preco_hora      Decimal?    @db.Decimal(10, 2)
+  preco_dia       Decimal?    @db.Decimal(10, 2)
+  quantidade      Int         @default(1)
+  foto_url        String?     @db.VarChar(500)
+  disponibilidade Boolean     @default(true)
+  latitude        Float?
+  longitude       Float?
+  id_fornecedor   String
+  id_categoria    String
+  criado_em       DateTime    @default(now())
+
+  fornecedor      Fornecedor  @relation(fields: [id_fornecedor], references: [id_fornecedor])
+  categoria       Categoria   @relation(fields: [id_categoria], references: [id_categoria])
+  reservas        Reserva[]
+  avaliacoes      Avaliacao[]
+
+  @@index([id_fornecedor])
+  @@index([id_categoria])
+  @@map("recurso")
+}
+
+model Reserva {
+  id_reserva           String        @id @default(uuid())
+  data_reserva         DateTime      @db.Date
+  hora_inicio          DateTime?     @db.Time
+  horas                Int           @default(1)
+  quantidade_solicitada Int          @default(1)
+  local_evento         String?       @db.VarChar(300)
+  estado               EstadoReserva @default(pendente)
+  id_utilizador  String
+  id_recurso     String
+  criado_em      DateTime      @default(now())
+
+  utilizador     Utilizador    @relation(fields: [id_utilizador], references: [id_utilizador])
+  recurso        Recurso       @relation(fields: [id_recurso], references: [id_recurso])
+  notificacoes   Notificacao[]
+  alocacoes      Alocacao[]
+  avaliacao      Avaliacao?
+  reclamacoes    Reclamacao[]
+
+  @@index([id_recurso, data_reserva])
+  @@index([id_utilizador])
+  @@map("reserva")
+}
+
+model Funcionario {
+  id_funcionario  String      @id @default(uuid())
+  nome            String      @db.VarChar(120)
+  contacto        String?     @db.VarChar(60)
+  funcao          String?     @db.VarChar(80)
+  id_fornecedor   String
+  criado_em       DateTime    @default(now())
+
+  fornecedor      Fornecedor  @relation(fields: [id_fornecedor], references: [id_fornecedor], onDelete: Cascade)
+  alocacoes       Alocacao[]
+
+  @@map("funcionario")
+}
+
+model Alocacao {
+  id_alocacao      String      @id @default(uuid())
+  id_funcionario   String
+  id_reserva       String
+  funcao_no_evento String?     @db.VarChar(80)
+  criado_em        DateTime    @default(now())
+
+  funcionario      Funcionario @relation(fields: [id_funcionario], references: [id_funcionario], onDelete: Cascade)
+  reserva          Reserva     @relation(fields: [id_reserva], references: [id_reserva], onDelete: Cascade)
+
+  @@unique([id_funcionario, id_reserva])
+  @@map("alocacao")
+}
+
+model Avaliacao {
+  id_avaliacao   String    @id @default(uuid())
+  id_reserva     String    @unique
+  id_utilizador  String
+  id_recurso     String
+  nota           Int
+  comentario     String?   @db.VarChar(500)
+  criado_em      DateTime  @default(now())
+
+  reserva        Reserva    @relation(fields: [id_reserva], references: [id_reserva], onDelete: Cascade)
+  utilizador     Utilizador @relation(fields: [id_utilizador], references: [id_utilizador])
+  recurso        Recurso    @relation(fields: [id_recurso], references: [id_recurso])
+
+  @@map("avaliacao")
+}
+
+model Reclamacao {
+  id_reclamacao  String   @id @default(uuid())
+  id_reserva     String
+  id_utilizador  String
+  assunto        String   @db.VarChar(150)
+  descricao      String   @db.VarChar(1000)
+  estado         String   @default("aberta") @db.VarChar(20)
+  resposta       String?  @db.VarChar(1000)
+  criado_em      DateTime @default(now())
+  atualizado_em  DateTime @updatedAt
+
+  reserva        Reserva    @relation(fields: [id_reserva], references: [id_reserva], onDelete: Cascade)
+  utilizador     Utilizador @relation(fields: [id_utilizador], references: [id_utilizador])
+
+  @@map("reclamacao")
+}
+
+model Notificacao {
+  id_notificacao  String    @id @default(uuid())
+  mensagem        String    @db.VarChar(300)
+  tipo            String    @db.VarChar(40)
+  lida            Boolean   @default(false)
+  id_utilizador   String
+  id_reserva      String?
+  criado_em       DateTime  @default(now())
+
+  utilizador      Utilizador @relation(fields: [id_utilizador], references: [id_utilizador])
+  reserva         Reserva?   @relation(fields: [id_reserva], references: [id_reserva])
+
+  @@index([id_utilizador])
+  @@map("notificacao")
+}
