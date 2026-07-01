@@ -32,7 +32,7 @@ export default function RelatoriosGestorPage() {
     <div className="max-w-4xl">
       <h1 className="text-2xl font-semibold text-slate-800 mb-6">Relatório de Utilização</h1>
 
-      <div className="grid grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         <div className="bg-white rounded-xl border border-slate-200 p-5">
           <p className="text-sm text-slate-500">Total de Reservas</p>
           <p className="text-3xl font-bold text-slate-800 mt-1">{totalReservas}</p>

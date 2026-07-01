@@ -46,7 +46,12 @@ const labelTipo: Record<string, string> = {
   gestor_municipal: 'Gestor Municipal',
 };
 
-export default function DashboardNav() {
+interface DashboardNavProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function DashboardNav({ isOpen, onClose }: DashboardNavProps) {
   const { payload, logout } = useAuth();
   const pathname = usePathname();
   const temNotificacoes = payload?.tipo === 'organizador' || payload?.tipo === 'fornecedor';
@@ -55,7 +60,6 @@ export default function DashboardNav() {
 
   useEffect(() => {
     if (!payload) return;
-    // Usar nome do token se disponível, senão buscar da API
     if (payload.nome) {
       setNomeUtilizador(payload.nome);
     } else {
@@ -65,17 +69,34 @@ export default function DashboardNav() {
     }
   }, [payload]);
 
+  // Fecha sidebar ao navegar em mobile
+  useEffect(() => {
+    onClose();
+  }, [pathname]);
+
   if (!payload) return null;
 
   const items = navPorTipo[payload.tipo] ?? [];
 
-  return (
-    <aside className="w-60 shrink-0 bg-[#0f2554] flex flex-col shadow-xl sticky top-0 h-screen overflow-y-auto">
+  const sidebarContent = (
+    <aside className="w-60 shrink-0 bg-[#0f2554] flex flex-col h-full overflow-y-auto">
       {/* Logo + utilizador */}
       <div className="px-5 py-5 border-b border-white/10">
-        <Link href="/" className="block">
-          <LogoSigare variante="compacto" altura={42} />
-        </Link>
+        <div className="flex items-center justify-between">
+          <Link href="/" className="block" onClick={onClose}>
+            <LogoSigare variante="compacto" altura={42} />
+          </Link>
+          {/* Botão fechar — só em mobile */}
+          <button
+            onClick={onClose}
+            className="lg:hidden text-blue-300 hover:text-white transition-colors p-1"
+            aria-label="Fechar menu"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
         <div className="mt-3 flex items-center gap-2">
           <div className="w-7 h-7 rounded-full bg-[#e9b94e] flex items-center justify-center text-[#0f2554] text-xs font-bold shrink-0">
             {nomeUtilizador ? nomeUtilizador.charAt(0).toUpperCase() : '…'}
@@ -125,5 +146,29 @@ export default function DashboardNav() {
         </button>
       </div>
     </aside>
+  );
+
+  return (
+    <>
+      {/* Desktop: sidebar fixa */}
+      <div className="hidden lg:flex w-60 shrink-0 sticky top-0 h-screen shadow-xl">
+        {sidebarContent}
+      </div>
+
+      {/* Mobile: gaveta deslizante com overlay */}
+      {isOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 flex">
+          {/* Overlay escuro */}
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          {/* Gaveta */}
+          <div className="relative z-10 flex h-full shadow-2xl">
+            {sidebarContent}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

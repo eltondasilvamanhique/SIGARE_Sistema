@@ -81,7 +81,7 @@ export default function UtilizadoresPage() {
         <p className="text-slate-400 text-sm">Nenhum utilizador encontrado.</p>
       ) : (
         <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto"><table className="w-full min-w-[600px] text-sm">
             <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
               <tr>
                 <th className="px-5 py-3 text-left">Nome</th>
@@ -108,7 +108,7 @@ export default function UtilizadoresPage() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
 
           {/* Rodapé com contagem */}
           <div className="px-5 py-3 border-t border-slate-100 bg-slate-50 text-xs text-slate-400">

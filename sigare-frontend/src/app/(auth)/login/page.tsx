@@ -287,37 +287,48 @@ export default function LoginPage() {
               </button>
             </form>
 
-            {/* Divisor */}
+            {/* Criar conta */}
             <div className="relative my-5">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-slate-100" />
               </div>
               <div className="relative flex justify-center">
-                <span className="px-3 bg-white text-xs text-slate-400">Precisando de ajuda?</span>
+                <span className="px-3 bg-white text-xs text-slate-400">ou</span>
               </div>
             </div>
 
-            {/* Suporte */}
             <Link
               href="/registar"
-              className="flex items-center gap-3 p-3.5 border border-slate-200 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all group"
+              className="flex items-center justify-center gap-2 py-3 border-2 border-[#e9b94e] text-[#0f2554] font-bold rounded-xl hover:bg-[#fef9e7] transition-colors text-sm"
             >
-              <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e4db7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
-                </svg>
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-slate-700">Criar nova conta</p>
-                <p className="text-xs text-slate-400">Registe-se gratuitamente na plataforma</p>
-              </div>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 group-hover:stroke-slate-500 transition-colors">
-                <polyline points="9 18 15 12 9 6"/>
-              </svg>
+              Criar nova conta
             </Link>
 
+            {/* Suporte */}
+            <div className="mt-5 rounded-xl bg-slate-50 border border-slate-100 px-4 py-3.5">
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2.5">Precisa de ajuda?</p>
+              <div className="flex flex-col gap-2">
+                <a href="tel:+258834240932" className="flex items-center gap-2.5 text-sm text-slate-600 hover:text-[#1e4db7] transition-colors">
+                  <span className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center shrink-0">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1e4db7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                  </span>
+                  +258 83 424 0932
+                </a>
+                <a href="mailto:eltondasilvamanhique@gmail.com" className="flex items-center gap-2.5 text-sm text-slate-600 hover:text-[#1e4db7] transition-colors">
+                  <span className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center shrink-0">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1e4db7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                  </span>
+                  eltondasilvamanhique@gmail.com
+                </a>
+              </div>
+            </div>
+
             {/* Nota de segurança */}
-            <div className="flex items-center justify-center gap-1.5 mt-5">
+            <div className="flex items-center justify-center gap-1.5 mt-4">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
