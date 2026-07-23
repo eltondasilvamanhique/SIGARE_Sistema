@@ -546,7 +546,7 @@ function PesquisaContent() {
   return (
     <div className="min-h-screen bg-[#f8f9fc]">
       {/* Navbar */}
-      <header className="bg-[#0f2554] px-6 py-4 flex items-center justify-between shadow-md">
+      <header className="sticky top-0 z-40 bg-[#0f2554] px-6 py-4 flex items-center justify-between shadow-md">
         <Link href="/" className="text-xl font-bold">
           <span className="text-white">SIGA</span><span className="text-[#e9b94e]">RE</span>
         </Link>
@@ -563,7 +563,7 @@ function PesquisaContent() {
         </div>
       </header>
 
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
         {/* Cabeçalho */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-[#0f2554]">Reserva de Recursos para Eventos</h1>
@@ -657,7 +657,7 @@ function PesquisaContent() {
                     </span>
                   </div>
                 )}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
                   {recursos.map((r) => (
                     <RecursoCard
                       key={r.id_recurso}
